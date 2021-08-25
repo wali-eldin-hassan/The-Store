@@ -24,7 +24,7 @@ Route::middleware('auth')->prefix('/dashboard')->group(function () {
     Route::get('/ui', 'DashboardController@ui');
     //****************************************************** */
     //CRUD for Users
-   // Route::group(['middleware' => ['permission:super-admin']], function () {
+    Route::group(['middleware' => ['permission:super-admin']], function () {
         Route::get('/users', 'UserController@index')->name('users.index');
         Route::get('/users/create', 'UserController@create')->name('users.create');
         Route::post('/users', 'UserController@store')->name('users.store');
@@ -37,7 +37,7 @@ Route::middleware('auth')->prefix('/dashboard')->group(function () {
     //********************************************************** */
 
     //*************************************************************** */
-   Route::group(['middleware' => ['permission:super-admin|admin']], function () {
+    Route::group(['middleware' => ['permission:super-admin|admin']], function () {
         Route::get('/categories', 'CategoryController@index')->name('categories.index');
         Route::get('/categories/create', 'CategoryController@create')->name('categories.create');
         Route::post('/categories', 'CategoryController@store')->name('categories.store');
@@ -46,7 +46,7 @@ Route::middleware('auth')->prefix('/dashboard')->group(function () {
         Route::delete('/categories/{category}', 'CategoryController@destroy')->name('categories.destroy');
         Route::get('/get/subcategories/{id}', 'CategoryController@getSubcategories')->name('categories.getsubcategories');
 
-        //***************************************************************************** */  
+        //***************************************************************************** */
 
         Route::get('/subcategories', 'SubcategoryController@index')->name('subcategories.index');
         Route::get('/subcategories/create', 'SubcategoryController@create')->name('subcategories.create');
@@ -55,12 +55,12 @@ Route::middleware('auth')->prefix('/dashboard')->group(function () {
         Route::put('/subcategories/{subcategory}', 'SubcategoryController@update')->name('subcategories.update');
         Route::delete('/subcategories/{subcategory}', 'SubcategoryController@destroy')->name('subcategories.destroy');
         // Route::post('/subcategories/update/{subcategory}', 'SubcategoryController@update')->name('subcategories@update');
-
     });
 
     //****************************************************************************** */
-   Route::group(['middleware' => ['permission:super-admin|admin|marketer']], function () {
-        Route::get('/products', 'ProductController@index')->name('products.index')->middleware('permission:super-admin');;
+    Route::group(['middleware' => ['permission:super-admin|admin|marketer']], function () {
+        Route::get('/products', 'ProductController@index')->name('products.index')->middleware('permission:super-admin');
+        ;
         Route::get('/products/create', 'ProductController@create')->name('products.create');
         Route::post('/products', 'ProductController@store')->name('products.store');
         Route::get('/products/{product}/edit', 'ProductController@edit')->name('products.edit');
@@ -76,18 +76,17 @@ Route::middleware('auth')->prefix('/dashboard')->group(function () {
         //******************************************************************************* */
 
         //************************************* *************/
-        // CRUD for customer service 
+        // CRUD for customer service
         Route::get('/customer/services/create', 'CustomerServiceController@create')->name('customer.services.create');
         Route::get('/customer/services', 'CustomerServiceController@index')->name('customer.services.index');
         Route::get('/customer/services/{order}', 'CustomerServiceController@show')->name('customer.services.show');
         Route::post('/customer/services', 'CustomerServiceController@store')->name('customer.services.store');
         Route::get('/customer/services/{order}/edit', 'CustomerServiceController@edit')->name('customer.services.edit');
         Route::put('/customer/services/{order}', 'CustomerServiceController@update')->name('customer.services.update');
- 
     });
     //******************************************************** */
 
-    Route::group(['middleware' => ['permission:super-admin|admin']], function () {
+    Route::group(['middleware' => ['permission:super-admin|admin|delivery-man']], function () {
         // CRUD for deliveries
         //******************************************************* */
 
@@ -105,6 +104,5 @@ Route::middleware('auth')->prefix('/dashboard')->group(function () {
         Route::get('/markters', 'MarkterController@index')->name('markters.index');
         Route::get('/markters/{order}', 'MarkterController@show')->name('markters.show');
         // Route::get('/markters/{order}/edit','MarkterController@edit')->name('markters.edit');
-
-   });
-
+    });
+});
