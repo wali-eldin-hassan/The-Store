@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Http\Requests\CustomerServiceStoreRequest;
+use App\Http\Requests\UpdateCustomerServiceRequest;
 use App\Order;
 use App\OrderDetail;
 use App\Product;
@@ -19,7 +20,7 @@ class CustomerServiceController extends Controller
      */
     public function index()
     {
-        $orders= Order::latest()->paginate(100);
+        $orders = Order::latest()->paginate(100);
 
         return inertia()->render('Dashboard/customer-services/index', [
             'orders' => $orders,
@@ -63,7 +64,7 @@ class CustomerServiceController extends Controller
             'customer_alt_phone' => $request->customer_alt_phone,
             'customer_address' => $request->customer_address,
             'discount' => $request->discount,
-            'note'=>$request->note,
+            'note' => $request->note,
             'user_id' => auth()->id(),
         ]);
 
@@ -120,10 +121,8 @@ class CustomerServiceController extends Controller
             'products' => $products,
             'categories' => $categories,
             'order' => $order,
-            'orderDetails'=>$orderDetails,
+            'orderDetails' => $orderDetails,
         ]);
-
-     
     }
 
     /**
@@ -133,23 +132,22 @@ class CustomerServiceController extends Controller
      * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update( Request $request , Order $order)
+    public function update(UpdateCustomerServiceRequest $request, Order $order)
     {
-      $request->validated();
+        $request->validated();
+
+        $order->update([
+            'customer_phone' => $request->customer_phone,
+            'customer_alt_phone' => $request->customer_alt_phone,
+            'customer_address' => $request->customer_address,
+            'discount' => $request->discount,
+            'note' => $request->note,
+            'user_id' => auth()->id(),
+        ]);
         
-      $order = Order::update([
-        'customer_phone' => $request->customer_phone,
-        'customer_alt_phone' => $request->customer_alt_phone,
-        'customer_address' => $request->customer_address,
-        'discount' => $request->discount,
-        'note'=>$request->note,
-        'user_id' => auth()->id(),
-    ]);
-        $order->getOrderDetails($request->orderDetails);
-        $order->save();
         session()->flash('toast', [
             'type' => 'success',
-            'message' => 'تم تعديل الطلب'
+            'message' => 'تم تعديل الطلب بنجاح'
         ]);
 
         return redirect()->route('customer.services.index');

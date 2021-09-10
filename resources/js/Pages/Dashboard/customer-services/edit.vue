@@ -12,7 +12,19 @@
         <div class="flex">
           <button
             @click="getAllProducts()"
-            class="mx-1 bg-gray-800 text-xs text-white px-2 py-1 font-semibold rounded uppercase hover:bg-gray-700 outline-none focus:bg-indigo-500"
+            class="
+              mx-1
+              bg-gray-800
+              text-xs text-white
+              px-2
+              py-1
+              font-semibold
+              rounded
+              uppercase
+              hover:bg-gray-700
+              outline-none
+              focus:bg-indigo-500
+            "
           >
             All
           </button>
@@ -20,7 +32,19 @@
             v-for="category in categories"
             :key="category.id"
             @click="getCategoryProducts(category)"
-            class="mx-1 bg-gray-800 text-xs text-white px-2 py-1 font-semibold rounded uppercase hover:bg-gray-700 outline-none focus:bg-indigo-500"
+            class="
+              mx-1
+              bg-gray-800
+              text-xs text-white
+              px-2
+              py-1
+              font-semibold
+              rounded
+              uppercase
+              hover:bg-gray-700
+              outline-none
+              focus:bg-indigo-500
+            "
           >
             {{ category.name }}
           </button>
@@ -30,7 +54,20 @@
             v-for="subcategory in subcategories"
             :key="subcategory.id"
             @click="getSubcategoryProducts(subcategory.id)"
-            class="mx-1 my-1 bg-gray-800 text-xs text-white px-2 py-1 font-semibold rounded uppercase hover:bg-gray-700 outline-none focus:bg-indigo-500"
+            class="
+              mx-1
+              my-1
+              bg-gray-800
+              text-xs text-white
+              px-2
+              py-1
+              font-semibold
+              rounded
+              uppercase
+              hover:bg-gray-700
+              outline-none
+              focus:bg-indigo-500
+            "
           >
             {{ subcategory.name }}
           </button>
@@ -39,20 +76,49 @@
           <div
             v-for="(orderDetail, key) in form.orderDetails"
             :key="key"
-            class="mt-4 flex flex-col justify-center items-center max-w-sm mx-auto"
+            class="
+              mt-4
+              flex flex-col
+              justify-center
+              items-center
+              max-w-sm
+              mx-auto
+            "
           >
             <div>
               <img
-                class="bg-gray-300 h-64 w-full rounded-lg shadow-md bg-cover bg-center"
+                class="
+                  bg-gray-300
+                  h-64
+                  w-full
+                  rounded-lg
+                  shadow-md
+                  bg-cover bg-center
+                "
                 :src="orderDetail.image"
               />
             </div>
 
             <div
-              class="w-56 md:w-64 bg-white -mt-10 shadow-lg rounded-lg overflow-hidden"
+              class="
+                w-56
+                md:w-64
+                bg-white
+                -mt-10
+                shadow-lg
+                rounded-lg
+                overflow-hidden
+              "
             >
               <h3
-                class="py-2 text-center font-bold uppercase tracking-wide text-gray-800"
+                class="
+                  py-2
+                  text-center
+                  font-bold
+                  uppercase
+                  tracking-wide
+                  text-gray-800
+                "
               >
                 {{ orderDetail.product.name }}
               </h3>
@@ -63,13 +129,23 @@
                 <span class="text-gray-800 font-bold"
                   >SDG
                   {{
-                    orderDetail.product.total_price * orderDetail.quantity
+                    (total_price =
+                      orderDetail.product.total_price * orderDetail.quantity)
                   }}</span
                 >
                 <div v-if="!orderDetail.selected">
                   <button
                     @click="addProduct(key)"
-                    class="bg-gray-800 text-xs text-white px-2 py-1 font-semibold rounded uppercase hover:bg-gray-700"
+                    class="
+                      bg-gray-800
+                      text-xs text-white
+                      px-2
+                      py-1
+                      font-semibold
+                      rounded
+                      uppercase
+                      hover:bg-gray-700
+                    "
                   >
                     Add to cart
                   </button>
@@ -77,18 +153,45 @@
                 <div v-else>
                   <button
                     @click="increment(key)"
-                    class="bg-gray-800 text-xs text-white px-2 py-1 font-semibold rounded uppercase hover:bg-gray-700"
+                    class="
+                      bg-gray-800
+                      text-xs text-white
+                      px-2
+                      py-1
+                      font-semibold
+                      rounded
+                      uppercase
+                      hover:bg-gray-700
+                    "
                   >
                     +
                   </button>
                   <button
-                    class="bg-gray-800 text-xs text-white px-2 py-1 font-semibold rounded uppercase hover:bg-gray-700"
+                    class="
+                      bg-gray-800
+                      text-xs text-white
+                      px-2
+                      py-1
+                      font-semibold
+                      rounded
+                      uppercase
+                      hover:bg-gray-700
+                    "
                   >
                     {{ orderDetail.quantity }}
                   </button>
                   <button
                     @click="decrement(key)"
-                    class="bg-gray-800 text-xs text-white px-2 py-1 font-semibold rounded uppercase hover:bg-gray-700"
+                    class="
+                      bg-gray-800
+                      text-xs text-white
+                      px-2
+                      py-1
+                      font-semibold
+                      rounded
+                      uppercase
+                      hover:bg-gray-700
+                    "
                   >
                     -
                   </button>
@@ -121,12 +224,31 @@
               ></base-input>
             </div>
             <div>
+              <base-input
+                type="text"
+                label=" ملاحظات"
+                option="أختياري"
+                name="note"
+                v-model="form.note"
+                :error="$page.errors.note"
+              ></base-input>
+            </div>
+            <div>
               <label class="block">
                 <span class="text-gray-700">عنوان العميل</span>
               </label>
               <textarea
                 v-model="form.customer_address"
-                class="form-input border-gray-300 focus:border-indigo-400 focus:shadow-none focus:bg-white mt-1 block w-full"
+                class="
+                  form-input
+                  border-gray-300
+                  focus:border-indigo-400
+                  focus:shadow-none
+                  focus:bg-white
+                  mt-1
+                  block
+                  w-full
+                "
               ></textarea>
               <span
                 v-if="$page.errors.customer_address"
@@ -145,13 +267,10 @@
                 :error="$page.errors.discount"
               ></base-input>
             </div>
-            <div >
+            <div>
               <p class="text-gray-700">
                 المبلغ الكلى : SDG
-                {{
-                  this.form.total_price  -
-                  this.form.discount
-                }}
+                {{ this.total_price-this.form.discount }}
               </p>
             </div>
             <div class="flex justify-end mt-9">
@@ -181,39 +300,40 @@ export default {
         category_id: "",
         customer_address: "",
         discount: "",
+        note: "",
         orderDetails: this.orderDetails,
       },
       orderDetails: [],
       subcategories: [],
-      total_price: 0,
+      total_price: "",
     };
   },
   created() {
     this.form.customer_phone = this.order.customer_phone;
     this.form.customer_alt_phone = this.order.customer_alt_phone;
     this.form.customer_address = this.order.customer_address;
+    this.form.note = this.order.note;
     this.form.discount = this.order.discount;
     this.form.total_price = this.order.total_price;
   },
   methods: {
-    addProduct(index) {
-      this.form.orderDetails[index].selected = !this.form.orderDetails[index]
-        .selected;
-      this.form.orderDetails[index].quantity++;
-      this.total_price += parseFloat(this.form.orderDetails[index].total_price);
-    },
+    // addProduct(index) {
+    //   this.form.orderDetails[index].selected =!this.form.orderDetails[index].selected;
+    //   this.form.orderDetails[index].quantity++;
+    //   this.total_price += parseFloat(this.form.orderDetails[index].total_price);
+    // },
 
     increment(index) {
       ++this.form.orderDetails[index].quantity;
-      this.total_price += parseFloat(this.form.orderDetails[index].total_price);
+      this.total_price += parseFloat(this.form.orderDetails.total_price);
     },
 
     decrement(index) {
       --this.form.orderDetails[index].quantity;
       this.total_price -= parseFloat(this.form.orderDetails[index].total_price);
       if (this.form.orderDetails[index].quantity == 0) {
-        this.form.orderDetails[index].selected = !this.form.orderDetails[index]
-          .selected;
+        this.form.orderDetails[index].selected =
+          !this.form.orderDetails[index].selected;
       }
     },
     submit() {

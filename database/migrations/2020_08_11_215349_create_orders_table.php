@@ -22,7 +22,7 @@ class CreateOrdersTable extends Migration
             $table->string('note')->nullable();
             $table->decimal('delivery_price')->nullable();
             $table->decimal('added_price')->nullable();
-            $table->decimal('discount')->default(0);
+            $table->decimal('discount')->default(0)->nullable();
             $table->decimal('total_price')->default(0);
             $table->string('status')->default(Config::get('constants.order.not_delivered'));
             $table->foreignId('delivery_man_id')->nullable();

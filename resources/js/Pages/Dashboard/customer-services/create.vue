@@ -200,8 +200,7 @@ export default {
   },
   methods: {
     addProduct(index) {
-      this.form.orderDetails[index].selected = !this.form.orderDetails[index]
-        .selected;
+      this.form.orderDetails[index].selected = !this.form.orderDetails[index].selected;
       this.form.orderDetails[index].quantity++;
       this.total_price += parseFloat(this.form.orderDetails[index].total_price);
     },
